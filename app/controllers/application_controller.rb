@@ -56,3 +56,5 @@ class ApplicationController < ActionController::Base
     }
   end
 end
+
+each
