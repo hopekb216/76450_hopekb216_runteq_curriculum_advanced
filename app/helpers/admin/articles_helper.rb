@@ -1,4 +1,3 @@
-module Admin::ArticlesHelper
   def eyecatch_align_class(article)
     case article.eyecatch_align
     when "left"   then "left"
@@ -7,4 +6,3 @@ module Admin::ArticlesHelper
     else "left"
     end
   end
-end
