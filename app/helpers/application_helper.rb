@@ -25,13 +25,13 @@ module ApplicationHelper
   def eyecatch_align_class(article)
     case article.eyecatch_align.to_s
     when 'left', '0'
-      'text-left'
+      'text-start'
     when 'center', '1'
       'text-center'
     when 'right', '2'
-      'text-right'
+      'text-end'
     else
-      'text-left'
+      'text-start'
     end
   end
 end
