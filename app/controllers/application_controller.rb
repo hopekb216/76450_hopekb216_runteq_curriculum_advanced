@@ -56,4 +56,3 @@ class ApplicationController < ActionController::Base
     }
   end
 end
-1git 
