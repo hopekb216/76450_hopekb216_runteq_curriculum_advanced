@@ -27,7 +27,13 @@ module ApplicationHelper
     when 'left', '0'   then 'text-start'
     when 'center', '1' then 'text-center'
     when 'right', '2'  then 'text-end'
-    else 'text-start'
+    else default_eyecatch_align
     end
+  end
+
+  private
+
+  def default_eyecatch_align
+    'text-start'
   end
 end
