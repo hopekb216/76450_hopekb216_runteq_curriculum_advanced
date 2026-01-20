@@ -35,6 +35,5 @@ module ApplicationHelper
 
   def default_eyecatch_align
     'text-start'
- 
   end
 end
