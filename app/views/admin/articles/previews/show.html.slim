@@ -1,0 +1,14 @@
+- set_meta_tags title: @article.title, description: @article.description, og: { image: @article.eye_catch_url(:ogp) }
+
+- cache @article, expires_in: 10.minutes
+  = render 'shared/article', article: @article
+
+
+section class=("eye_catch #{eyecatch_align_class(@article)}")
+  - if @article.eye_catch.attached?
+    = image_tag @article.eye_catch_url(:lg),
+                class: 'img-fluid',
+                style: "width: #{@article.eyecatch_width}px"
+
+.article-body
+  = raw @article.build_body

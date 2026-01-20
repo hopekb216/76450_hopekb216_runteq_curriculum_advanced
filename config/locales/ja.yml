@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    attributes:
+      article:
+        eyecatch_width: "アイキャッチ横幅"
+
+  errors:
+    messages:
+      greater_than_or_equal_to: "は%{count}以上の値にしてください"
+      less_than_or_equal_to: "は%{count}以下の値にしてください"
