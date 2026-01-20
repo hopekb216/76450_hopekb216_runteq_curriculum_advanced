@@ -9,6 +9,7 @@
 
   section class="eye_catch #{align_class}"
     - if article.eye_catch.attached?
+
       = image_tag article.eye_catch_url(:lg),
                   class: 'img-fluid',
                   style: "width: #{article.eyecatch_width}px"

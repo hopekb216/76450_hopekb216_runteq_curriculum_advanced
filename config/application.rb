@@ -22,5 +22,6 @@ module Blog
     end
 
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+    config.autoload_paths += %W(#{config.root}/app/decorators)
   end
 end

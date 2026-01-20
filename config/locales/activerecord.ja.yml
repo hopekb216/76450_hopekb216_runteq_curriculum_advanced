@@ -58,5 +58,3 @@ ja:
             password_confirmation:
               blank: 'パスワードを再入力してください'
               confirmation: 'パスワードが異なります'
-
-

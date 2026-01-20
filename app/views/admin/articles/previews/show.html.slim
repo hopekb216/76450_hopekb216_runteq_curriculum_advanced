@@ -3,6 +3,7 @@
 - cache @article, expires_in: 10.minutes
   = render 'shared/article', article: @article
 
+
 section class=("eye_catch #{eyecatch_align_class(@article)}")
   - if @article.eye_catch.attached?
     = image_tag @article.eye_catch_url(:lg),

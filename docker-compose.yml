@@ -15,7 +15,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - .:/v3_advanced_rails:delegated
+      - .:/76450_hopekb216_runteq_curriculum_advanced:delegated
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/app/node_modules:cached
       - /app/vendor

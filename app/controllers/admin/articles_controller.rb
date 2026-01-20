@@ -49,6 +49,7 @@ class Admin::ArticlesController < ApplicationController
     authorize(@article)
 
     @article.destroy
+
     redirect_to admin_articles_path
   end
 

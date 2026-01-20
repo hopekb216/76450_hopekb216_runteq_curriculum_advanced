@@ -10,7 +10,7 @@ default: &default
 development:
   <<: *default
   database: advanced_development
-
+  
 test:
   <<: *default
   database: advanced_test
