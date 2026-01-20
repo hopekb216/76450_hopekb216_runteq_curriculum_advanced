@@ -30,17 +30,37 @@
           = f.input :title
           = f.input :slug
           = f.input :eye_catch, as: :file
+
           - if @article.eye_catch.attached?
             = image_tag @article.eye_catch_url(:thumb), class: 'img-thumbnail'
             br
             br
+
+          / ★ アイキャッチ位置（Simple Form を完全に外した安定版）
+          .form-group
+            label アイキャッチ位置
+
+            .radio
+              = radio_button_tag 'article[eyecatch_align]', 'left'
+              = label_tag 'article_eyecatch_align_left', '左寄せ'
+
+            .radio
+              = radio_button_tag 'article[eyecatch_align]', 'center'
+              = label_tag 'article_eyecatch_align_center', '中央'
+
+            .radio
+              = radio_button_tag 'article[eyecatch_align]', 'right'
+              = label_tag 'article_eyecatch_align_right', '右寄せ'
+
+          .form-group = f.label :eyecatch_width, 'アイキャッチ横幅(px)' = f.number_field :eyecatch_width, min: 100, max: 700, class: 'form-control'
+
           = f.input :description, input_html: { class: 'js-autosize' }
           = f.input :author_id, as: :select2, collection: Author.pluck(:name, :id)
           = f.input :category_id, as: :select2, collection: Category.pluck(:name, :id)
           = f.input :tag_ids, as: :select2, collection: Tag.pluck(:name, :id), include_blank: false, input_html: { multiple: true }
 
         .box-footer
-          = f.button :submit, class: %w[btn btn-primary]
+          = f.button :submit, '更新する', class: %w[btn btn-primary]
 
     .box.box-solid.box-info
       .box-header

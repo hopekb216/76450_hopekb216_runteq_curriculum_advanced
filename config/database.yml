@@ -3,20 +3,18 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   host: db
+  port: 3306
   username: root
   password: password
 
 development:
   <<: *default
-  database: db/advanced_development
+  database: advanced_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/advanced_test
+  database: advanced_test
 
 production:
   <<: *default
-  database: db/production
+  database: production

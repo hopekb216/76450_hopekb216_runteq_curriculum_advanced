@@ -36,6 +36,7 @@ class Admin::ArticlesController < ApplicationController
 
     @article.assign_attributes(article_params)
     @article.adjust_state
+
     if @article.save
       flash[:notice] = '更新しました'
       redirect_to edit_admin_article_path(@article.uuid)
@@ -48,7 +49,6 @@ class Admin::ArticlesController < ApplicationController
     authorize(@article)
 
     @article.destroy
-
     redirect_to admin_articles_path
   end
 
@@ -56,7 +56,10 @@ class Admin::ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(
-      :title, :description, :slug, :state, :published_at, :eye_catch, :category_id, :author_id, tag_ids: []
+      :title, :description, :slug, :state, :published_at,
+      :eye_catch, :category_id, :author_id,
+      :eyecatch_align, :eyecatch_width,
+      tag_ids: []
     )
   end
 

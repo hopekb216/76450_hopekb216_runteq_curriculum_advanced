@@ -1,1 +1,1 @@
-require('./articleBlockEditor')
+//= require ../javascript/articleBlockEditor/index

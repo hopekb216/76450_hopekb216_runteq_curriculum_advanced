@@ -1,8 +1,13 @@
-- set_meta_tags title: "[Preview]#{@article.title}", og: { image: @article.eye_catch_url(:ogp) }
+- set_meta_tags title: @article.title, description: @article.description, og: { image: @article.eye_catch_url(:ogp) }
 
-- content_for 'stylesheets' do
-  - stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css'
+- cache @article, expires_in: 10.minutes
+  = render 'shared/article', article: @article
 
-a.github-fork-ribbon[href="" data-ribbon="Preview"]
+section class=("eye_catch #{eyecatch_align_class(@article)}")
+  - if @article.eye_catch.attached?
+    = image_tag @article.eye_catch_url(:lg),
+                class: 'img-fluid',
+                style: "width: #{@article.eyecatch_width}px"
 
-= render 'shared/article', article: @article
+.article-body
+  = raw @article.build_body

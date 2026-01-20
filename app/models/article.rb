@@ -40,12 +40,14 @@ class Article < ApplicationRecord
   has_one_attached :eye_catch
 
   enum state: { draft: 0, published: 1, publish_wait: 2 }
+  enum eyecatch_align: { left: 0, center: 1, right: 2 }
 
   validates :slug, slug_format: true, uniqueness: true, length: { maximum: 255 }, allow_blank: true
   validates :title, presence: true, uniqueness: true, length: { maximum: 255 }
   validates :description, length: { maximum: 1000 }, allow_blank: true
   validates :state, presence: true
   validates :eye_catch, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg)\Z}, maximum: 10_485_760 }
+  validates :eyecatch_width, numericality: { less_than_or_equal_to: 700, greater_than_or_equal_to: 100 }, allow_blank: true
 
   with_options if: :published? do
     validates :slug, slug_format: true, presence: true, length: { maximum: 255 }
@@ -68,19 +70,30 @@ class Article < ApplicationRecord
   scope :body_contain, ->(word) { joins(:sentences).where('sentences.body LIKE ?', "%#{word}%") }
   scope :past_published, -> { where('published_at <= ?', Time.current) }
 
-  def build_body(controller)
+  # ============================
+  # 修正済み build_body（完成版）
+  # ============================
+  def build_body
     result = ''
 
     article_blocks.each do |article_block|
       result << if article_block.sentence?
                   sentence = article_block.blockable
                   sentence.body.to_s
+
                 elsif article_block.medium?
                   medium = ActiveDecorator::Decorator.instance.decorate(article_block.blockable)
-                  controller.render_to_string("shared/_media_#{medium.media_type}", locals: { medium: medium }, layout: false)
+                  ApplicationController.renderer.render(
+                    partial: "shared/media_#{medium.media_type}",
+                    locals: { medium: medium }
+                  )
+
                 elsif article_block.embed?
                   embed = ActiveDecorator::Decorator.instance.decorate(article_block.blockable)
-                  controller.render_to_string("shared/_embed_#{embed.embed_type}", locals: { embed: embed }, layout: false)
+                  ApplicationController.renderer.render(
+                    partial: "shared/embed_#{embed.embed_type}",
+                    locals: { embed: embed }
+                  )
                 end
     end
 
